@@ -4,10 +4,10 @@ server:
 spring:
   datasource:
     #  数据源基本配置
-    #  username: sen
-    #  password: 123
-    #  url: jdbc:mysql://127.0.0.1:3306/kxw?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
-    #  driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: root
+      url: jdbc:mysql://47.113.82.122:3306/kxw?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+      driver-class-name: com.mysql.jdbc.Driver
 
     
   jpa:

@@ -2,6 +2,7 @@ package com.tell.model;
 
 import org.springframework.data.annotation.Id;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Date;
 
@@ -11,27 +12,29 @@ import java.util.Date;
  */
 public class Task {
 
-
     @Id
     private Integer taskId; //任务id
 
 
     private  Integer taskType;//任务类型
-    private  String title;//任务标题
-    private String img;//任务图片
-    private  Integer totalTask;//总任务数
-    private  Integer finishedTask;//完成任务数
-    private DecimalFormat price;//任务价格
-    private  String linkAddress;//链接地址
-    private  String videoAddress;//视频地址
 
+    private  String title;//任务标题
+
+    private String img;//任务图片
+
+    private  Integer totalTask;//总任务数
+
+    private  Integer finishedTask;//完成任务数
+
+    private BigDecimal price;//任务价格
+
+    private  String linkAddress;//链接地址
+
+    private  String videoAddress;//视频地址
 
     private Date createDate; //创建时间
 
     private Date updateDate; //修改时间
-
-
-
 
     public Integer getTaskId() {
         return taskId;
@@ -81,11 +84,11 @@ public class Task {
         this.finishedTask = finishedTask;
     }
 
-    public DecimalFormat getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(DecimalFormat price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -120,6 +123,9 @@ public class Task {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
+
+
 
 
     @Override

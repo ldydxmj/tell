@@ -1,15 +1,12 @@
 package com.tell.service.impl;
 
-import com.sun.xml.internal.bind.v2.TODO;
+import com.tell.bean.Page;
 import com.tell.mapper.TaskMapper;
 import com.tell.model.Task;
 import com.tell.service.TaskService;
-import com.tell.util.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +20,7 @@ public class TaskServiceImpl implements TaskService {
     private TaskMapper taskMapper;
 
     /**
-     * 根据昵称查询用户
+     * 根据id查询用户
      * @param id: 用户昵称
      * @return
      */
@@ -33,24 +30,48 @@ public class TaskServiceImpl implements TaskService {
     }
 
 
-
+    /**
+     * 添加任务
+     * @param task
+     */
     @Override
     public void save(Task task) {
+//        System.out.println("ok");
         this.taskMapper.insert(task);
     }
 
-//    @Override
-//    public Task create() {
-//        Task task = new Task();
-//        task.setTitle(title);
-////        TODO 3.26
-//       if(taskType==1){
-//           task.setImg(img);
-//       }
-//        task.setCreateDate(new Date());
-//        task.setUpdateDate(null);
-//
-//        this.save(task);
-//        return task;
-//    }
+    /**
+     * 更新任务
+     * @param task
+     */
+    @Override
+    public void update(Task task) {
+        taskMapper.updateByPrimaryKey(task);
+    }
+
+    /**
+     * 查找所有任务
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Task> findAll(Integer pageNo, Integer pageSize) {
+        return taskMapper.findAll(pageNo,pageSize);
+    }
+
+    /**
+     * 查找所有任务page形式
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public Page<Task> page(Integer pageNo, Integer pageSize) {
+        List<Task> list = taskMapper.findAll((pageNo - 1) * pageSize, pageSize);
+        int count = 20;
+
+        return  new Page<>(pageNo,pageSize,count,list);
+    }
+
 }

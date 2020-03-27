@@ -26,10 +26,8 @@ public class TaskController {
     private TaskService taskService;
 
 
-
-
     /**
-     * 新增文章
+     * 新增任务
      * @param task
      * @return
      */
@@ -39,6 +37,45 @@ public class TaskController {
         task.setCreateDate(new Date());
          taskService.save(task);
         return Result.success(task);
+    }
+
+
+    /**
+     * 更新任务
+     * @param task
+     * @return
+     */
+    @PostMapping(value = "/updateTask")
+    public Result update(@RequestBody Task task){
+
+        ApiAssert.notNull(task.getTaskId(),"任务不存在");
+
+        task.setUpdateDate(new Date());
+
+       taskService.update( task);
+
+        return Result.success(task);
+    }
+
+    /**
+     * 获取任务列表
+     * @return
+     */
+    @GetMapping(value = "/task-list")
+    public Result getList(){
+        List<Task> list = taskService.findAll(0, 5);
+        return Result.success(list);
+    }
+
+    /**
+     * 获取任务列表-page形式
+     * @param pageNo
+     * @return
+     */
+    @GetMapping(value = "/task-page")
+    public Result articles(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo){
+        Page<Task> page = taskService.page(pageNo, 10);
+        return Result.success( page);
     }
 
 

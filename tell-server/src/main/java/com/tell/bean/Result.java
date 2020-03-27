@@ -14,7 +14,7 @@ public class Result {
 
     private int code; //状态码
     private String description; //描述信息
-    private Object detail; //成功时返回的对象
+    private Object data; //成功时返回的对象
 
     /**
      * 成功
@@ -28,14 +28,14 @@ public class Result {
     /**
      * 成功
      * 返回对象
-     * @param detail:返回的对象
+     * @param data:返回的对象
      * @return
      */
-    public static Result success(Object detail) {
+    public static Result success(Object data) {
         Result result = new Result();
         result.setCode(200);
         result.setDescription("success");
-        result.setDetail(detail);
+        result.setData(data);
         return result;
     }
 
@@ -71,7 +71,7 @@ public class Result {
         Result result = new Result();
         result.setCode(code);
         result.setDescription(description);
-        result.setDetail(null);
+        result.setData(null);
         return result;
     }
 
@@ -87,7 +87,7 @@ public class Result {
         Result result = new Result();
         result.setCode(code);
         result.setDescription(description);
-        result.setDetail(null);
+        result.setData(null);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(JsonUtil.objectToJson(result));
     }
@@ -108,11 +108,11 @@ public class Result {
         this.description = description;
     }
 
-    public Object getDetail() {
-        return detail;
+    public Object getData() {
+        return data;
     }
 
-    public void setDetail(Object detail) {
-        this.detail = detail;
+    public void setData(Object data) {
+        this.data = data;
     }
 }

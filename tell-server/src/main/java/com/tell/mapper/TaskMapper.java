@@ -14,13 +14,30 @@ import java.util.List;
 public interface TaskMapper {
 
     /**
-     * 根据用户昵称查询用户
+     * 根据id查询任务
      * @param id
      * @return
      */
     Task findTaskById(@Param("id") Integer id);
 
+    /**
+     * 查找所有的任务
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    List<Task> findAll(@Param("pageNo") Integer pageNo, @Param("pageSize") Integer pageSize);
 
-    int insert(Task user);
-
+    /**
+     * 插入任务
+     * @param task
+     * @return
+     */
+    int insert(Task task);
+    /**
+     * 更新任务
+     * @param task
+     * @return
+     */
+    int updateByPrimaryKey(Task task);
 }

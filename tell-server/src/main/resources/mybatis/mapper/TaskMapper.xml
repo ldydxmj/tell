@@ -48,10 +48,29 @@
 
     </select>
 
+    <!--更新文章-->
+    <update id="updateByPrimaryKey" parameterType="com.tell.model.Task">
+        UPDATE
+          task
+        SET
+             task_type=#{taskType},
+        title=#{title},
+        img=#{img},
+        total_task=#{totalTask},
+        finished_task=#{finishedTask},
+        price=#{price},
+        link_address=#{linkAddress},
+        video_address=#{videoAddress},
+        create_date=#{createDate},
+        update_date=#{updateDate}
+          WHERE
+            id = #{taskId}
+    </update>
 
-    <insert id="insert" parameterType="com.tell.model.Task" keyProperty="userId" useGeneratedKeys="true">
-        INSERT INTO user
-        ( task_type,
+    <insert id="insert" parameterType="com.tell.model.Task" keyProperty="taskId" useGeneratedKeys="true">
+        INSERT INTO task
+        (
+        task_type,
         title,
         img,
         total_task,
@@ -62,16 +81,47 @@
         create_date,
         update_date)
         VALUES
-        (#{task_type},
+        (
+        #{taskType},
         #{title},
         #{img},
-        #{total_task},
-        #{finished_task},
+        #{totalTask},
+        #{finishedTask},
         #{price},
-        #{link_address},
-        #{video_address},
-        #{create_date},
-        #{update_date}
+        #{linkAddress},
+        #{videoAddress},
+        #{createDate},
+        #{updateDate}
         )
     </insert>
+
+    <!--查询所有主题-->
+    <select id="findAll" resultType="com.tell.model.Task">
+        SELECT
+        id,
+        task_type,
+        title,
+        img,
+        total_task,
+        finished_task,
+        price,
+        link_address,
+        video_address,
+        create_date,
+        update_date
+        FROM
+        task
+        ORDER BY
+        create_date desc
+        <if test="pageNo != null">
+            LIMIT #{pageNo}
+            <if test="pageSize != null">
+                ,#{pageSize}
+            </if>
+        </if>
+    </select>
+
+
+
+
 </mapper>

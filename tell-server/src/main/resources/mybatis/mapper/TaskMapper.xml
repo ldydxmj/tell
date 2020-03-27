@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tell.mapper.TaskMapper">
+
+    <resultMap id="BaseResultMap" type="com.tell.model.Task">
+        <!--ID-->
+        <id column="id" jdbcType="INTEGER" property="taskId"/>
+        <!--任务类型-->
+        <result column="task_type" jdbcType="INTEGER" property="taskType"/>
+        <!--b标题-->
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <!--图片地址-->
+        <result column="img" jdbcType="VARCHAR" property="img"/>
+        <!--总任务-->
+        <result column="total_task" jdbcType="INTEGER" property="totalTask"/>
+        <!--完成任务-->
+        <result column="finished_task" jdbcType="INTEGER" property="finishedTask"/>
+        <!--价格-->
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <!--链接-->
+        <result column="link_address" jdbcType="VARCHAR" property="linkAddress"/>
+        <!--视频链接-->
+        <result column="video_address" jdbcType="VARCHAR" property="videoAddress"/>
+
+        <!--创建时间-->
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <!--更新时间-->
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,task_type,title,img,total_task,finished_task,price,link_address,video_address,create_date
+        ,update_date
+    </sql>
+
+    <!--根据任务id查询-->
+    <select id="findTaskById" resultType="com.tell.model.Task">
+        SELECT
+          <include refid="Base_Column_List"/>
+        FROM
+          task
+        WHERE
+          id = #{id}
+
+    </select>
+
+
+    <insert id="insert" parameterType="com.tell.model.Task" keyProperty="userId" useGeneratedKeys="true">
+        INSERT INTO user
+        ( task_type,
+        title,
+        img,
+        total_task,
+        finished_task,
+        price,
+        link_address,
+        video_address,
+        create_date,
+        update_date)
+        VALUES
+        (#{task_type},
+        #{title},
+        #{img},
+        #{total_task},
+        #{finished_task},
+        #{price},
+        #{link_address},
+        #{video_address},
+        #{create_date},
+        #{update_date}
+        )
+    </insert>
+</mapper>

@@ -4,6 +4,7 @@ import com.tell.bean.Page;
 import com.tell.mapper.TaskMapper;
 import com.tell.model.Task;
 import com.tell.service.TaskService;
+import com.tell.util.TaskTypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void save(Task task) {
 //        System.out.println("ok");
+
         this.taskMapper.insert(task);
     }
 
@@ -73,5 +75,6 @@ public class TaskServiceImpl implements TaskService {
 
         return  new Page<>(pageNo,pageSize,count,list);
     }
+
 
 }

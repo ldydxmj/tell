@@ -2,13 +2,10 @@ package com.tell.controller;
 
 import com.tell.bean.Page;
 import com.tell.bean.Result;
-import com.tell.conf.properties.SiteConfig;
 import com.tell.exception.ApiAssert;
-import com.tell.model.Article;
 import com.tell.model.Task;
-import com.tell.model.User;
 import com.tell.service.TaskService;
-import com.tell.service.UserService;
+import com.tell.util.TaskTypeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +31,7 @@ public class TaskController {
     @PostMapping(value = "/task")
     public Result save(@RequestBody Task task){
         ApiAssert.notNull(task,"对象为空");
+        handleGoOn(task);
         task.setCreateDate(new Date());
          taskService.save(task);
         return Result.success(task);
@@ -49,7 +47,7 @@ public class TaskController {
     public Result update(@RequestBody Task task){
 
         ApiAssert.notNull(task.getTaskId(),"任务不存在");
-
+        handleGoOn(task);
         task.setUpdateDate(new Date());
 
        taskService.update( task);
@@ -78,5 +76,25 @@ public class TaskController {
         return Result.success( page);
     }
 
+    /**
+     * 校验参数
+     * @param task
+     */
+    private  void handleGoOn(Task task){
+
+        ApiAssert.notEmpty(task.getTitle(),"标题是必须的");
+        if(task.getTaskType()== TaskTypeUtil.TASK_TYPE_IMG){
+            ApiAssert.notEmpty(task.getImg(),"图片是必须的");
+        }
+
+        if(task.getTaskType()== TaskTypeUtil.TASK_TYPE_LINK){
+            ApiAssert.notEmpty(task.getLinkAddress(),"链接是必须的");
+        }
+
+        if(task.getTaskType()== TaskTypeUtil.TASK_TYPE_VIDEO){
+            ApiAssert.notEmpty(task.getVideoAddress(),"视频链接是必须的");
+        }
+
+    }
 
 }

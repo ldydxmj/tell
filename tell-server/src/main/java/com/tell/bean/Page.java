@@ -9,38 +9,38 @@ import java.util.List;
  */
 public class Page<T> {
 
-    private Integer number; //当前是第几页
-    private Integer size; //每页返回多少条数据
+
+    private Integer pageNo; //当前是第几页
+    private Integer pageSize; //每页返回多少条数据
     private Integer totalPages; //一共有多少页
     private Integer totalCount; //一共有多少条数据
-    private List<T> content; //数据实体
+    private List<T> list; //数据实体
     private Boolean first; //是否第一页
     private Boolean last; //是否最后一页
 
-    public Page(Integer number, Integer size, Integer totalCount, List<T> data) {
-        this.number = number;
-        this.size = size;
+    public Page(Integer pageNo, Integer pageSize, Integer totalCount, List<T> list) {
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
         this.totalCount = totalCount;
-        this.content = data;
-        this.totalPages = totalCount % size == 0 ? totalCount / size : (totalCount / size) + 1;
-        this.first = number == 1;
-        this.last = number.equals(this.totalPages) || number > this.totalPages;
+        this.list = list;
+        this.totalPages = totalCount % pageSize == 0 ? totalCount / pageSize : (totalCount / pageSize) + 1;
+        this.first = pageNo == 1;
+        this.last = pageNo.equals(this.totalPages) || pageNo > this.totalPages;
+    }
+    public Integer getPageNo() {
+        return pageNo;
     }
 
-    public Integer getNumber() {
-        return number;
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public Integer getPageSize() {
+        return pageSize;
     }
 
-    public Integer getSize() {
-        return size;
-    }
-
-    public void setSize(Integer size) {
-        this.size = size;
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
     public Integer getTotalPages() {
@@ -59,12 +59,12 @@ public class Page<T> {
         this.totalCount = totalCount;
     }
 
-    public List<T> getContent() {
-        return content;
+    public List<T> getList() {
+        return list;
     }
 
-    public void setContent(List<T> content) {
-        this.content = content;
+    public void setList(List<T> list) {
+        this.list = list;
     }
 
     public Boolean getFirst() {
@@ -82,4 +82,5 @@ public class Page<T> {
     public void setLast(Boolean last) {
         this.last = last;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.tell.service.impl;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.tell.bean.Page;
 import com.tell.mapper.TaskMapper;
 import com.tell.model.Task;
@@ -71,9 +72,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Page<Task> page(Integer pageNo, Integer pageSize) {
         List<Task> list = taskMapper.findAll((pageNo - 1) * pageSize, pageSize);
-        int count = 20;
 
-        return  new Page<>(pageNo,pageSize,count,list);
+        int count = taskMapper.countTask();
+        Page page= new Page<>(pageNo,pageSize,count,list);
+        return page;
     }
 
 

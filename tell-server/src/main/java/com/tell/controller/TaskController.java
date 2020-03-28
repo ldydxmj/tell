@@ -71,8 +71,8 @@ public class TaskController {
      * @return
      */
     @GetMapping(value = "/task-page")
-    public Result articles(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo){
-        Page<Task> page = taskService.page(pageNo, 10);
+    public Result articles(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,@RequestParam(value = "pageSize",defaultValue = "11") Integer pageSize){
+        Page<Task> page = taskService.page(pageNo, pageSize);
         return Result.success( page);
     }
 

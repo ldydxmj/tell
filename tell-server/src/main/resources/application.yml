@@ -6,7 +6,7 @@ spring:
     #  数据源基本配置
       username: root
       password: root
-      url: jdbc:mysql://47.113.82.122:3306/kxw?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+      url: jdbc:mysql://127.0.0.1:3306/kxw?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
       driver-class-name: com.mysql.jdbc.Driver
 
     

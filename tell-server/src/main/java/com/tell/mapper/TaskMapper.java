@@ -40,4 +40,6 @@ public interface TaskMapper {
      * @return
      */
     int updateByPrimaryKey(Task task);
+
+    int countTask( );
 }
